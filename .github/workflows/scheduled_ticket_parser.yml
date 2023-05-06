@@ -2,6 +2,7 @@ name: Scheduled Ticket Scraper
 run-name: Ticket scraping run ${{ github.run_number }}
 
 on:
+  workflow_dispatch:
   schedule: # Schedule the job to run every hour
     - cron: "0 * * * *"
 
