@@ -1,5 +1,5 @@
 name: Scheduled Ticket Scraper
-run-name: Ticket scraping run ${{ github.run_number }}
+run-name: Ticket scraping initiated by ${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -25,8 +25,4 @@ jobs:
 
       - name: Generate ticket price info from crawler
         run: |
-          python src/ticket_price_scraper.py
-
-      - name: Push to Discord webhook
-        run: |
-          python src/ticket_notification_bot.py
+          python src/main.py

@@ -137,6 +137,11 @@ def get_simple_ticket_info():
         json.dump(ticket_info, f, indent=2)
 
 
+def pass_ticket_info_to_bot() -> dict:
+    ticket_scraper = TicketInfoScraper()
+    return ticket_scraper.get_lowest_price_ticket_info(TARGET_URLS)
+
+
 def create_log_dir():
     if not os.path.exists(LOG_DIR):
         os.makedirs(LOG_DIR)
