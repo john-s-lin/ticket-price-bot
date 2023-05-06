@@ -5,7 +5,7 @@ import os
 import requests
 import sys
 
-from utils.utils import LOG_DIR, TICKET_INFO_FILE
+from utils.utils import TICKET_INFO_FILE
 
 dotenv.load_dotenv()
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
@@ -21,9 +21,10 @@ def get_ticket_info_from_file(filename: str) -> dict:
 
 def post_messages(messages: list) -> None:
     for message in messages:
+        # Avatar URL is optional
         payload = {
             "username": "Twice Ticket Notification Bot",
-            "avatar_url": "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg",  # Optional, this is Jihyo's meme face
+            "avatar_url": "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg",
             "embeds": [{"description": message, "color": 1673044}],
         }
 
@@ -56,7 +57,15 @@ def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
     section = data["lowest_price_ticket"]["section"]
     available_tickets = data["lowest_price_ticket"]["available_tickets"]
     seated_together = data["lowest_price_ticket"]["seated_together"]
-    message = f"[{title}]({url})\nmin price: ${min_price}\nmax price: ${max_price}\nlowest ticket price: ${lowest_ticket_price}\nsection: {section}\navailable tickets: {available_tickets}\nseated together: {seated_together}"
+    message = (
+        f"[{title}]({url})\n"
+        + f"min price: ${min_price}\n"
+        + f"max price: ${max_price}\n"
+        + f"lowest ticket price: ${lowest_ticket_price}\n"
+        + f"section: {section}\n"
+        + f"available tickets: {available_tickets}\n"
+        + f"seated together: {seated_together}"
+    )
     return message
 
 
@@ -67,8 +76,20 @@ def parse_message_from_seatgeek_ticket_info(url: str, data: dict) -> str:
     median_price = data["median_price"]
     avg_price = data["avg_price"]
     lowest_ticket_price = data["lowest_price_ticket"]["ticket_price"]
-    section = data["lowest_price_ticket"]["section"]
-    message = f"[{title}]({url})\nmin price: ${min_price:.2f}\nmax price: ${max_price:.2f}\nmedian price: ${median_price:.2f}\navg price: ${avg_price:.2f}\nlowest ticket price: ${lowest_ticket_price:.2f}\nsection: {section}"
+    lowest_ticket_section = data["lowest_price_ticket"]["section"]
+    best_deal_price = data["best_deal_ticket"]["ticket_price"]
+    best_deal_section = data["best_deal_ticket"]["section"]
+    message = (
+        f"[{title}]({url})\n"
+        + f"min price: ${min_price:.2f}\n"
+        + f"max price: ${max_price:.2f}\n"
+        + f"median price: ${median_price:.2f}\n"
+        + f"avg price: ${avg_price:.2f}\n"
+        + f"lowest ticket price: ${lowest_ticket_price:.2f}\n"
+        + f"section: {lowest_ticket_section}\n"
+        + f"best deal price: ${best_deal_price:.2f}\n"
+        + f"section: {best_deal_section}"
+    )
     return message
 
 
