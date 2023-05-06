@@ -7,8 +7,6 @@ import requests
 from utils.utils import LOG_DIR, TICKET_INFO_FILE
 
 dotenv.load_dotenv()
-DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
-DISCORD_SERVER = os.environ.get("DISCORD_SERVER")
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
 
 logging.basicConfig(
