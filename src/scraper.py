@@ -12,9 +12,9 @@ from bs4 import BeautifulSoup
 # I just want Twice tickets at the lowest price because actual scalpers are the worst
 TARGET_URLS = [
     "https://www.ticketmaster.ca/twice-5th-world-tour-ready-to-toronto-ontario-07-02-2023/event/10005E51A7641B24",  # Ticketmaster might block this because it's a bot
-    # "https://www.ticketmaster.ca/twice-5th-world-tour-ready-to-toronto-ontario-07-03-2023/event/10005E70271A4DB8",
-    # "https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-02-7-30-pm/concert/5952228",
-    # "https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-03-7-30-pm/concert/5976418",
+    "https://www.ticketmaster.ca/twice-5th-world-tour-ready-to-toronto-ontario-07-03-2023/event/10005E70271A4DB8",
+    "https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-02-7-30-pm/concert/5952228",
+    "https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-03-7-30-pm/concert/5976418",
     "https://www.stubhub.ca/twice-toronto-tickets-7-2-2023/event/151494669/?quantity=2",
     "https://www.stubhub.ca/twice-toronto-tickets-7-3-2023/event/151600390/?quantity=2",
 ]
@@ -46,10 +46,8 @@ class TwiceTicketInfoScraper:
             logging.info(f"Parsing ticket info from {url}")
             if re.search("stubhub", url):
                 output[url] = self.parse_stubhub_for_lowest_price_ticket(soup)
-            elif re.search("ticketmaster", url):
-                output[url] = self.parse_ticketmaster(soup)
             elif re.search("seatgeek", url):
-                output[url] = self.parse_seatgeek(soup)
+                output[url] = self.parse_seatgeek_for_lowest_price_ticket(soup)
 
         return output
 
@@ -88,6 +86,42 @@ class TwiceTicketInfoScraper:
                 "section": section,
                 "available_tickets": available_tickets,
                 "seated_together": seated_together,
+            },
+        }
+
+    def parse_seatgeek_for_lowest_price_ticket(self, soup: BeautifulSoup) -> dict:
+        """Return a dictionary of the lowest price ticket information from Seatgeek
+
+        Args:
+            soup (BeautifulSoup): soup object of the page
+
+        Returns:
+            dict: dictionary of the lowest price ticket information
+        """
+        raw_target = soup.find(
+            "script", {"id": "__NEXT_DATA__", "type": "application/json"}
+        ).get_text()
+        target = json.loads(raw_target)
+        date = target["props"]["pageProps"]["event"]["datetime_local"]
+        min_price = target["props"]["pageProps"]["event"]["stats"]["lowest_price"]
+        max_price = target["props"]["pageProps"]["event"]["stats"]["highest_price"]
+        median_price = target["props"]["pageProps"]["event"]["stats"]["median_price"]
+        avg_price = target["props"]["pageProps"]["event"]["stats"]["average_price"]
+        cheapest_seat = target["props"]["pageProps"]["event"]["stats"]["variants"][0][
+            "stats"
+        ]["cheapest_seat_listing"]
+        section = cheapest_seat["section"]
+        ticket_price = cheapest_seat["price_fees"]
+
+        return {
+            "date": date,
+            "min_price": min_price,
+            "max_price": max_price,
+            "median_price": median_price,
+            "avg_price": avg_price,
+            "lowest_price_ticket": {
+                "ticket_price": ticket_price,
+                "section": section,
             },
         }
 
