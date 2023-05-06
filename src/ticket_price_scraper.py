@@ -102,14 +102,20 @@ class TwiceTicketInfoScraper:
             "script", {"id": "__NEXT_DATA__", "type": "application/json"}
         ).get_text()
         target = json.loads(raw_target)
-        date = target["props"]["pageProps"]["event"]["datetime_local"]
-        min_price = target["props"]["pageProps"]["event"]["stats"]["lowest_price"]
-        max_price = target["props"]["pageProps"]["event"]["stats"]["highest_price"]
-        median_price = target["props"]["pageProps"]["event"]["stats"]["median_price"]
-        avg_price = target["props"]["pageProps"]["event"]["stats"]["average_price"]
-        cheapest_seat = target["props"]["pageProps"]["event"]["stats"]["variants"][0][
-            "stats"
-        ]["cheapest_seat_listing"]
+
+        # Store event info
+        event = target["props"]["pageProps"]["event"]
+        date = event["datetime_local"]
+
+        # Get ticket stats
+        stats = event["stats"]
+        min_price = stats["lowest_price"]
+        max_price = stats["highest_price"]
+        median_price = stats["median_price"]
+        avg_price = stats["average_price"]
+
+        # Get cheapest ticket info
+        cheapest_seat = stats["variants"][0]["stats"]["cheapest_seat_listing"]
         section = cheapest_seat["section"]
         ticket_price = cheapest_seat["price_fees"]
 
