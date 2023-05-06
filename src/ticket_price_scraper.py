@@ -3,6 +3,7 @@ import logging
 import os
 import re
 import requests
+import sys
 
 from pathlib import Path
 from bs4 import BeautifulSoup
@@ -21,9 +22,7 @@ TARGET_URLS = [
 
 
 # Set logging to console
-logging.basicConfig(
-    filename=LOG_DIR.joinpath("output.log"), filemode="w", level=logging.INFO
-)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 class TicketInfoScraper:

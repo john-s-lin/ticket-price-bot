@@ -3,15 +3,14 @@ import json
 import logging
 import os
 import requests
+import sys
 
 from utils.utils import LOG_DIR, TICKET_INFO_FILE
 
 dotenv.load_dotenv()
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
 
-logging.basicConfig(
-    filename=LOG_DIR.joinpath("bot.log"), filemode="w", level=logging.INFO
-)
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 def get_ticket_info_from_file(filename: str) -> dict:
