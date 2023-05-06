@@ -3,10 +3,10 @@ import logging
 import os
 import re
 import requests
-import sys
 
 from pathlib import Path
 from bs4 import BeautifulSoup
+from utils.utils import LOG_DIR, OUTPUT_DIR, TICKET_INFO_FILE
 
 
 # I just want Twice tickets at the lowest price because actual scalpers are the worst
@@ -19,9 +19,6 @@ TARGET_URLS = [
     "https://www.stubhub.ca/twice-toronto-tickets-7-3-2023/event/151600390/?quantity=2",
 ]
 
-LOG_DIR = Path(__file__).parents[1].joinpath("logs")
-OUTPUT_DIR = Path(__file__).parents[1].joinpath("output")
-TICKET_INFO_FILE = OUTPUT_DIR.joinpath("ticket_info.json")
 
 # Set logging to console
 logging.basicConfig(
@@ -29,7 +26,7 @@ logging.basicConfig(
 )
 
 
-class TwiceTicketInfoScraper:
+class TicketInfoScraper:
     def __init__(self) -> None:
         pass
 
@@ -133,7 +130,7 @@ class TwiceTicketInfoScraper:
 
 
 def get_simple_ticket_info():
-    ticket_scraper = TwiceTicketInfoScraper()
+    ticket_scraper = TicketInfoScraper()
     ticket_info = ticket_scraper.get_lowest_price_ticket_info(TARGET_URLS)
 
     with open(TICKET_INFO_FILE, "w") as f:
