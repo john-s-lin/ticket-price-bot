@@ -59,9 +59,9 @@ def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
     seated_together = data["lowest_price_ticket"]["seated_together"]
     message = (
         f"[{title}]({url})\n"
-        + f"min price: ${min_price}\n"
-        + f"max price: ${max_price}\n"
-        + f"lowest ticket price: ${lowest_ticket_price}\n"
+        + f"min price (estimate): ${min_price:.2f}\n"
+        + f"max price (estimate): ${max_price:.2f}\n"
+        + f"lowest ticket price (estimate): ${lowest_ticket_price:.2f}\n"
         + f"section: {section}\n"
         + f"available tickets: {available_tickets}\n"
         + f"seated together: {seated_together}"
@@ -81,13 +81,13 @@ def parse_message_from_seatgeek_ticket_info(url: str, data: dict) -> str:
     best_deal_section = data["best_deal_ticket"]["section"]
     message = (
         f"[{title}]({url})\n"
-        + f"min price: ${min_price:.2f}\n"
-        + f"max price: ${max_price:.2f}\n"
-        + f"median price: ${median_price:.2f}\n"
-        + f"avg price: ${avg_price:.2f}\n"
-        + f"lowest ticket price: ${lowest_ticket_price:.2f}\n"
+        + f"min price (estimate): ${min_price:.2f}\n"
+        + f"max price (estimate): ${max_price:.2f}\n"
+        + f"median price (estimate): ${median_price:.2f}\n"
+        + f"avg price (estimate): ${avg_price:.2f}\n"
+        + f"lowest ticket price (estimate): ${lowest_ticket_price:.2f}\n"
         + f"section: {lowest_ticket_section}\n"
-        + f"best deal price: ${best_deal_price:.2f}\n"
+        + f"best deal price (estimate): ${best_deal_price:.2f}\n"
         + f"section: {best_deal_section}"
     )
     return message
