@@ -5,4 +5,8 @@ https://www.stubhub.ca/beyonce-toronto-tickets-7-9-2023/event/151445832/?quantit
 https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-02-7-30-pm/concert/5952228
 https://seatgeek.ca/twice-tickets/toronto-canada-scotiabank-arena-4-2023-07-03-7-30-pm/concert/5976418
 https://www.stubhub.ca/twice-toronto-tickets-7-2-2023/event/151494669/?quantity=2
+<<<<<<< HEAD
 https://www.stubhub.ca/twice-toronto-tickets-7-3-2023/event/151600390/?quantity=2
+=======
+https://www.stubhub.ca/twice-toronto-tickets-7-3-2023/event/151600390/?quantity=2
+>>>>>>> b9458be (feat: ticket bot parses event name)
