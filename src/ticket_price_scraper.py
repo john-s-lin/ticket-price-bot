@@ -46,7 +46,7 @@ class TicketInfoScraper:
         """
         raw_target = soup.find("script", {"id": "index-data"}).get_text()
         target = json.loads(raw_target)
-        event_name = target["eventUrl"].split("/")[1].split("-")[0].capitalize()
+        event_name = target["eventUrl"].split("/")[1].split("-")[0].upper()
         item_list = target["grid"]["items"]
         min_price = target["grid"]["minPrice"]
         max_price = target["grid"]["maxPrice"]
@@ -91,7 +91,7 @@ class TicketInfoScraper:
 
         # Store event info
         event = target["props"]["pageProps"]["event"]
-        performer_name = event["performers"][0]["name"]
+        performer_name = event["performers"][0]["name"].upper()
         date = event["datetime_local"]
 
         # Get ticket stats

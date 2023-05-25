@@ -25,7 +25,7 @@ def post_messages(messages: list) -> None:
         # Avatar URL is optional
         avatar_url = (
             "https://pbs.twimg.com/media/Fb1nDwmVsAA18-2.jpg"
-            if "Beyonce" in event
+            if "BEYONCE" in event
             else "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg"
         )
         payload = {
