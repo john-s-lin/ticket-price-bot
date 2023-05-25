@@ -21,10 +21,16 @@ def get_ticket_info_from_file(filename: str) -> dict:
 
 def post_messages(messages: list) -> None:
     for message in messages:
+        event = message.split("\n")[0].split(",")[0].split(":")[1].strip()
         # Avatar URL is optional
+        avatar_url = (
+            "https://pbs.twimg.com/media/Fb1nDwmVsAA18-2.jpg"
+            if "Beyonce" in event
+            else "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg"
+        )
         payload = {
-            "username": "Twice Ticket Notification Bot",
-            "avatar_url": "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg",
+            "username": f"{event} Ticket Notification Bot",
+            "avatar_url": avatar_url,
             "embeds": [{"description": message, "color": 1673044}],
         }
 
@@ -50,7 +56,7 @@ def parse_message_from_ticket_info(ticket_info: dict) -> list:
 
 
 def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
-    title = f"Stubhub: {data['date']}"
+    title = f"Stubhub: {data['event_name']}, {data['date']}"
     min_price = data["min_price"]
     max_price = data["max_price"]
     lowest_ticket_price = data["lowest_price_ticket"]["ticket_price"]
@@ -70,7 +76,7 @@ def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
 
 
 def parse_message_from_seatgeek_ticket_info(url: str, data: dict) -> str:
-    title = f"Seatgeek: {data['date']}"
+    title = f"Seatgeek: {data['event_name']}, {data['date']}"
     min_price = data["min_price"]
     max_price = data["max_price"]
     median_price = data["median_price"]
