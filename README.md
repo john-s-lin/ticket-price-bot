@@ -4,6 +4,10 @@
 
 Due to the nature of Ticketmaster and Live Nation's anti-consumer practices, I was unable to purchase tickets to see Twice in Toronto, the first time they've ever come to Canada. Not having the time to check ticket resellers (scalpers are the worst!) for the cheapest seats every day, I decided to write a script to check prices for me, then send me updates on Discord, using a scheduled Github Action.
 
+#### Update: I got tickets!
+
+2023-05-25: This bot scraper now works for all events in `Seatgeek` and `Stubhub`. You may notice that the bot now ingests Beyonce concert tickets as well.
+
 ## Usage
 
 1. Clone/fork the repository
