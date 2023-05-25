@@ -24,7 +24,7 @@ def post_messages(messages: list) -> None:
         event = message.split("\n")[0].split(",")[0].split(":")[1].strip()
         # Avatar URL is optional
         avatar_url = (
-            "https://img.buzzfeed.com/buzzfeed-static/static/2015-05/27/9/campaign_images/webdr07/beyonce-has-managed-to-become-a-meme-and-its-abso-2-7569-1432732297-9_dblbig.jpg?resize=1200:*"
+            "https://pbs.twimg.com/media/Fb1nDwmVsAA18-2.jpg"
             if "Beyonce" in event
             else "https://pbs.twimg.com/media/FAsTIRoUcAArn67.jpg"
         )
