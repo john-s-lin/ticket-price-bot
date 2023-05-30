@@ -6,7 +6,7 @@ Due to the nature of Ticketmaster and Live Nation's anti-consumer practices, I w
 
 #### Update: I got tickets!
 
-2023-05-25: This bot scraper now works for all events in `Seatgeek` and `Stubhub`. You may notice that the bot now ingests Beyonce concert tickets as well.
+2023-05-25: This bot scraper now parses event names from `Seatgeek` and `Stubhub` and names the bot directly after the event name. Hence, the bot name will be called `<event_name> Ticket Notification Bot`. This is to prevent confusion when running multiple bots for different events.
 
 ## Usage
 
