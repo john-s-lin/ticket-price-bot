@@ -2,7 +2,7 @@
 
 ## Premise
 
-Due to the nature of Ticketmaster and Live Nation's anti-consumer practices, I was unable to purchase tickets to see Twice in Toronto, the first time they've ever come to Canada. Not having the time to check ticket resellers (scalpers are the worst!) for the cheapest seats every day, I decided to write a script to check prices for me, then send me updates on Discord, using a scheduled Github Action.
+Unable to purchase tickets to see a concert in Toronto for a performer's first time in Canada, I wanted to automate checking ticket resellers for the cheapest seats every day. I decided to write a script to check prices for me, then send me updates on Discord, using a scheduled Github Action.
 
 #### Update: I got tickets!
 
