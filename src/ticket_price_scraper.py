@@ -65,10 +65,10 @@ class TicketInfoScraper:
         return {
             "event_name": event_name,
             "date": date,
-            "min_price": min_price * 1.15,
-            "max_price": max_price * 1.15,
+            "min_price": min_price,
+            "max_price": max_price,
             "lowest_price_ticket": {
-                "ticket_price": raw_price * 1.15,
+                "ticket_price": raw_price,
                 "section": section,
                 "available_tickets": available_tickets,
                 "seated_together": seated_together,
@@ -114,16 +114,16 @@ class TicketInfoScraper:
         return {
             "event_name": f"{performer_name}",
             "date": date,
-            "min_price": min_price * 1.13,
-            "max_price": max_price * 1.13,
-            "median_price": median_price * 1.13,
-            "avg_price": avg_price * 1.13,
+            "min_price": min_price,
+            "max_price": max_price,
+            "median_price": median_price,
+            "avg_price": avg_price,
             "lowest_price_ticket": {
-                "ticket_price": cheapest_ticket_price * 1.13,
+                "ticket_price": cheapest_ticket_price,
                 "section": cheapest_section,
             },
             "best_deal_ticket": {
-                "ticket_price": best_deal_ticket_price * 1.13,
+                "ticket_price": best_deal_ticket_price,
                 "section": best_deal_section,
             },
         }
