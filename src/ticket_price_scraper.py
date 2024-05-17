@@ -24,6 +24,7 @@ class TicketInfoScraper:
 
             if response.status_code != 200:
                 logging.error(f"Failed to get response from {url}")
+                logging.error(f"Response: {response.headers}")
                 continue
 
             soup = BeautifulSoup(response.text, "html.parser")
