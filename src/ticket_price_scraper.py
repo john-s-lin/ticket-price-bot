@@ -2,12 +2,12 @@ import json
 import logging
 import os
 import re
-import requests
 import sys
 
+import requests
 from bs4 import BeautifulSoup
-from utils.utils import LOG_DIR, OUTPUT_DIR, TICKET_INFO_FILE, TARGET_URLS
 
+from utils.utils import LOG_DIR, OUTPUT_DIR, TARGET_URLS, TICKET_INFO_FILE
 
 # Set logging to console
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
@@ -23,7 +23,9 @@ class TicketInfoScraper:
             response = requests.get(url)
 
             if response.status_code != 200:
-                logging.error(f"Failed to get response from {url}")
+                logging.error(
+                    f"Failed to get response from {url} using regular requests"
+                )
                 logging.error(f"Response: {response.headers}")
                 continue
 
