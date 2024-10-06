@@ -3,6 +3,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: base
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
     volumes:
       - .:/app
     stdin_open: true
