@@ -3,6 +3,7 @@ import logging
 import os
 import re
 import sys
+from typing import Dict, List
 
 import requests
 from bs4 import BeautifulSoup
@@ -49,6 +50,7 @@ class TicketInfoScraper:
         """
         raw_target = soup.find("script", {"id": "index-data"}).get_text()
         target = json.loads(raw_target)
+
         event_name = target["eventName"]
         item_list = target["grid"]["items"]
         min_price = target["grid"]["minPrice"]
@@ -64,6 +66,10 @@ class TicketInfoScraper:
                     section = item["section"]
                     available_tickets = item["availableQuantities"]
                     seated_together = item["isSeatedTogether"]
+                    deal_score = item["inventoryListingScore"]["dealScore"]
+                    seat_quality = item["inventoryListingScore"]["seatQualityScore"]
+
+        best_listing = self._get_stubhub_best_listing(item_list)
 
         return {
             "event_name": event_name,
@@ -75,8 +81,33 @@ class TicketInfoScraper:
                 "section": section,
                 "available_tickets": available_tickets,
                 "seated_together": seated_together,
+                "deal_score": deal_score,
+                "seat_quality": seat_quality,
+            },
+            "best_listing": {
+                "ticket_price": best_listing["rawPrice"],
+                "section": best_listing["section"],
+                "available_tickets": best_listing["availableQuantities"],
+                "seated_together": best_listing["isSeatedTogether"],
+                "deal_score": best_listing["inventoryListingScore"]["dealScore"],
+                "seat_quality": best_listing["inventoryListingScore"][
+                    "seatQualityScore"
+                ],
             },
         }
+
+    def _get_stubhub_best_listing(self, listings: List[Dict]) -> Dict:
+        best_listing = None
+        best_score = 0
+        for item in listings:
+            if "inventoryListingScore" not in item:
+                continue
+
+            curr_score = item["inventoryListingScore"]["dealScore"]
+            if curr_score > best_score:
+                best_score = curr_score
+                best_listing = item
+        return best_listing
 
     def parse_seatgeek_for_lowest_price_ticket(self, soup: BeautifulSoup) -> dict:
         """Return a dictionary of the lowest price ticket information from Seatgeek
