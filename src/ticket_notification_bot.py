@@ -1,9 +1,10 @@
-import dotenv
 import json
 import logging
 import os
-import requests
 import sys
+
+import dotenv
+import requests
 
 from utils.utils import TICKET_INFO_FILE
 
@@ -63,14 +64,24 @@ def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
     section = data["lowest_price_ticket"]["section"]
     available_tickets = data["lowest_price_ticket"]["available_tickets"]
     seated_together = data["lowest_price_ticket"]["seated_together"]
+    deal_score = data["lowest_price_ticket"]["deal_score"]
+    seat_quality = data["lowest_price_ticket"]["seat_quality"]
     message = (
         f"[{title}]({url})\n"
         + f"min price (base): ${min_price:.2f}\n"
         + f"max price (base): ${max_price:.2f}\n"
         + f"lowest ticket price (base): ${lowest_ticket_price:.2f}\n"
-        + f"section: {section}\n"
-        + f"available tickets: {available_tickets}\n"
-        + f"seated together: {seated_together}"
+        + f"\tsection: {section}\n"
+        + f"\tavailable tickets: {available_tickets}\n"
+        + f"\tseated together: {seated_together}\n"
+        + f"\tdeal score: {deal_score:.2f}\n"
+        + f"\tseat quality: {seat_quality:.5f}\n"
+        + f"best listing price (base): ${data["best_listing"]["ticket_price"]:.2f}\n"
+        + f"\tsection: {data["best_listing"]["section"]}"
+        + f"\tavailable tickets: {data["best_listing"]["available_tickets"]}"
+        + f"\tseated together: {data["best_listing"]["seated_together"]}"
+        + f"\tdeal score: {data["best_listing"]["deal_score"]:.2f}"
+        + f"\tseat quality: {data["best_listing"]["seat_quality"]:.5f}"
     )
     return message
 
