@@ -74,14 +74,14 @@ def parse_message_from_stubhub_ticket_info(url: str, data: dict) -> str:
         + f"section: {section}\n"
         + f"available tickets: {available_tickets}\n"
         + f"seated together: {seated_together}\n"
-        + f"deal score: {deal_score:.2f}\n"
-        + f"seat quality: {seat_quality:.5f}\n"
+        + f"deal score: {deal_score}\n"
+        + f"seat quality: {seat_quality}\n"
         + f"best listing price (base): ${data["best_listing"]["ticket_price"]:.2f}\n"
         + f"section: {data["best_listing"]["section"]}\n"
         + f"available tickets: {data["best_listing"]["available_tickets"]}\n"
         + f"seated together: {data["best_listing"]["seated_together"]}\n"
-        + f"deal score: {data["best_listing"]["deal_score"]:.2f}\n"
-        + f"seat quality: {data["best_listing"]["seat_quality"]:.5f}"
+        + f"deal score: {data["best_listing"]["deal_score"]}\n"
+        + f"seat quality: {data["best_listing"]["seat_quality"]}"
     )
     return message
 
