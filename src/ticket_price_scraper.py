@@ -104,7 +104,7 @@ class TicketInfoScraper:
                 continue
 
             curr_score = item["inventoryListingScore"]["dealScore"]
-            if curr_score > best_score:
+            if float(curr_score) > float(best_score):
                 best_score = curr_score
                 best_listing = item
         return best_listing
