@@ -1,0 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ticket-price-bot"
+version = "0.1.0"
+dependencies = ["beautifulsoup4", "python-dotenv", "requests"]
+requires-python = ">= 3.11"
+readme = "README.md"
+description = "Tired of manually searching ticket resellers for the lowest price tickets to your desired concert? Let's automate that!"
+license = { file = "LICENSE" }
