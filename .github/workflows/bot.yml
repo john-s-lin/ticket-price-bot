@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip sync pyproject.toml
+          uv sync
 
       - name: Generate ticket price info from crawler
         env:
