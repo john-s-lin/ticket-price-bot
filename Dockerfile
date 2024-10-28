@@ -1,15 +1,17 @@
-FROM python:alpine AS base
+FROM ghcr.io/astral-sh/uv:alpine AS base
 
 COPY . /app
 
 VOLUME ["/logs"]
 
 RUN apk update &&\
-    apk add bash make musl-dev
+    apk add bash make musl-dev python3~=3.12
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN uv venv -p 3.12
+
+RUN uv pip sync pyproject.toml
 
 FROM base AS dev
 

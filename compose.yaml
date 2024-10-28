@@ -6,6 +6,7 @@ services:
       target: base
     volumes:
       - .:/app
+    image: ticket-price-bot:0.1.a
     stdin_open: true
     tty: true
 
@@ -16,5 +17,6 @@ services:
       target: dev
     volumes:
       - .:/app
+    image: ticket-price-bot:0.1.a-dev
     stdin_open: true
     tty: true
