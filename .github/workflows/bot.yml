@@ -30,4 +30,4 @@ jobs:
         env:
           WEBHOOK_URL: ${{ secrets.WEBHOOK }}
         run: |
-          python src/main.py
+          uv run src/main.py
