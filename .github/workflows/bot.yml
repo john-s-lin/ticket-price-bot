@@ -4,7 +4,7 @@ run-name: Ticket scraping initiated by ${{ github.actor }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 12 * * *"
 
 jobs:
   build:
